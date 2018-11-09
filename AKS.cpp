@@ -423,32 +423,7 @@ int aks (mpz_t n)
 }
 
 
-
-/* int main (int argc, char* argv[]) */
-/* { */
-/*   mpz_t n; */
-/*   mpz_init_set_str(n, argv[1], 10); */
-/*   printf("%d\n", aks(n)); */
-/*   mpz_clear(n); */
-/*   return 0; */
-/* } */
-
-
-
-/* int main (int argc, char* argv[]) */
-/* { */
-/*   char n_str[1000]; */
-/*   scanf("%s", n_str); */
-/*   mpz_t n; */
-/*   mpz_init_set_str(n, n_str, 10); */
-/*   gmp_printf("%Zd\n", n); */
-/*   printf("%d\n", aks(n)); */
-/*   mpz_clear(n); */
-/*   return 0; */
-/* } */
-
-
-
+/*Driver Function*/
 int main (int argc, char* argv[])
 {
     printf("AKS Primality test\n");
