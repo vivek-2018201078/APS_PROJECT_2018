@@ -1,5 +1,4 @@
 
-// C++ program Miller-Rabin primality test
 #include <bits/stdc++.h>
 #include <gmp.h>
 #include <gmpxx.h>
@@ -7,26 +6,8 @@ using namespace std;
 
 unsigned long seed = 73;
 
-int power(int x, unsigned int y, int p)
-{
-    int res = 1;
-    x = x % p;
-    while (y > 0)
-    {
-        if (y & 1)
-            res = (res*x) % p;
-
-        y = y>>1;
-        x = (x*x) % p;
-    }
-    return res;
-}
-
 bool miillerTest(mpz_t d, mpz_t n)
 {
-    // Pick a random number in [2..n-2]
-    // Corner cases make sure that n > 4
-    //int a = 2 + rand() % (n - 4);
 
     mpz_t temp, rand, a, x, nminus;
     mpz_init(temp);
