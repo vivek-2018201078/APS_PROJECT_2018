@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include <gmp.h>
+#include <iostream>
+
+using namespace std;
 
 #define COMPOSITE 0
 #define PRIME 1
@@ -422,8 +425,6 @@ int aks (mpz_t n)
     return PRIME;
 }
 
-
-/*Driver Function*/
 int main (int argc, char* argv[])
 {
     printf("AKS Primality test\n");
@@ -440,7 +441,7 @@ int main (int argc, char* argv[])
         } else
             printf("composite\n");
         double total_time = (double) (clock() - start) / (double) CLOCKS_PER_SEC;
-        gmp_printf("time = %f\n",total_time);
+        gmp_printf("time = %f seconds\n",total_time);
     }
     else {
         char n_str[1000];
@@ -455,15 +456,13 @@ int main (int argc, char* argv[])
             int ans = aks(n);
             if (ans == 1) {
                 count++;
-                //printf("%d\n", ans);
+                cout << n_str << ": prime\n";
             } else {
-                //printf("%d\n", ans);
+                cout << n_str << ": composite\n";
             }
-            /*printf("Time: %f\n",
-                       (double)(clock() - start) / (double)CLOCKS_PER_SEC);
-            */}
+        }
         double total_time = (double) (clock() - start) / (double) CLOCKS_PER_SEC;
-        gmp_printf("total time = %f\n", total_time);
+        gmp_printf("total time = %f seconds\n", total_time);
         mpz_clear(n);
         fclose(fp);
 
