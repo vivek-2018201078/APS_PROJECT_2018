@@ -16,7 +16,7 @@ using namespace std;
 
 typedef struct {
     mpz_t table;
-    unsigned int size;		/* Bit set 1: composite */
+    unsigned int size;		
 } Sieve;
 
 
@@ -199,7 +199,7 @@ void polynomial_modular_multiplication (Polynomial** pp_poly_res,
     mpz_t coef;
     mpz_init(coef);
     unsigned int i;
-    for (i = 0; i < r; i++) {	/* For every result coefficient */
+    for (i = 0; i < r; i++) {	
         mpz_set_ui(coef, 0);
         mpz_t c0, c1;
         mpz_init(c0);
@@ -207,7 +207,7 @@ void polynomial_modular_multiplication (Polynomial** pp_poly_res,
         unsigned int jmin = i > p_poly1->deg? i - p_poly1->deg: 0;
         unsigned int jmax = i < p_poly0->deg? i: p_poly0->deg;
         unsigned int j;
-        for (j = jmin; j <= jmax; j++) { /* For all a(j) * b(i - j) */
+        for (j = jmin; j <= jmax; j++) {
             get_polynomial_coef(&c0, p_poly0, j);
             get_polynomial_coef(&c1, p_poly1, i - j);
             mpz_mul(c0, c0, c1);
@@ -219,11 +219,11 @@ void polynomial_modular_multiplication (Polynomial** pp_poly_res,
             get_polynomial_coef(&c0, p_poly0, j);
             get_polynomial_coef(&c1, p_poly1, i + r - j);
             mpz_mul(c0, c0, c1);
-            mpz_add(coef, c0, coef);	/* coef += c0 * c1 */
+            mpz_add(coef, c0, coef);
         }
         mpz_clear(c0);
         mpz_clear(c1);
-        mpz_mod(coef, coef, n);	/* coef = coef % n */
+        mpz_mod(coef, coef, n);
         if (mpz_cmp_ui(coef, 0) != 0) {
             set_polynomial_coef((*pp_poly_res), i, &coef);
         }
@@ -234,7 +234,6 @@ void polynomial_modular_multiplication (Polynomial** pp_poly_res,
 
 
 
-/* Compute ((*p_poly_base) ^ n) % (X ^ r - 1) */
 void polynomial_modular_power (Polynomial** pp_poly_res, Polynomial* p_poly_base,
                                mpz_t n, unsigned int r)
 {
@@ -260,22 +259,20 @@ void polynomial_modular_power (Polynomial** pp_poly_res, Polynomial* p_poly_base
 
 int aks (mpz_t n)
 {
-    /* Step 1: perfect power */
     if (mpz_perfect_power_p(n)) {
         return COMPOSITE;
     }
-    /* Step 2: witness search */
     mpz_t r;
     mpz_init_set_ui(r, 2);
     unsigned int r_ui = 2;
     unsigned int logn_ui = mpz_sizeinbase(n, 2);
     mpz_t logn;
     mpz_init_set_ui(logn, logn_ui);
-    mpz_t imax;			/* Upper bound of i = 4 * logn ^ 2*/
+    mpz_t imax;		
     mpz_init(imax);
     mpz_mul(imax, logn, logn);
     mpz_mul_ui(imax, imax, 4);
-    Sieve sieve;			/* Sieve of Eratosthenes */
+    Sieve sieve;		
     initialize_sieve(&sieve);
     while (mpz_cmp(r, n) < 0) {
         if (mpz_divisible_p(n, r)) {
@@ -452,7 +449,6 @@ int main (int argc, char* argv[])
         clock_t start = clock();
         while (fscanf(fp, "%s", n_str) != EOF) {
             mpz_set_str(n, n_str, 10);
-            //gmp_printf("%Zd: ", n);
             int ans = aks(n);
             if (ans == 1) {
                 count++;
