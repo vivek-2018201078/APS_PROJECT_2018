@@ -101,21 +101,17 @@ int main(int argc, char* argv[])
         int count = 0;
         clock_t start = clock();
         while (fscanf(fp, "%s", n_str) != EOF) {
-            //clock_t start = clock();
             mpz_set_str(n, n_str, 10);
             if (isPrime(n, k)) {
-                //cout << n_str << " prime\n";
+                cout << n_str << " prime\n";
                 count++;
             }
             else {
-                //cout << n_
-                // str << " composite\n";
+                cout << n_str << " composite\n";
             }
-            //printf("Time: %f\n",
-              //     (double) (clock() - start) / (double) CLOCKS_PER_SEC);
         }
         double total_time = (double) (clock() - start) / (double) CLOCKS_PER_SEC;
-        gmp_printf("total time = %f\n",total_time);
+        gmp_printf("total time = %f seconds\n",total_time);
         cout << "total primes = " << count << "\n";
         fclose(fp);
     }
